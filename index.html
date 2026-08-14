@@ -380,13 +380,40 @@
   .work-title{font-family:var(--display);font-size:22px;font-weight:600;}
   .work-tag{font-size:11.5px;color:var(--red);letter-spacing:.1em;text-transform:uppercase;margin-top:4px;}
 
-  .work-card.empty{
-    display:flex;align-items:center;justify-content:center;flex-direction:column;gap:10px;
-    border:1px dashed var(--line);background:transparent;cursor:default;
+  /* ---------- vertical work (tiktok) ---------- */
+  .vertical-head{margin-top:64px;margin-bottom:32px;}
+  .vertical-grid{
+    display:flex;flex-wrap:wrap;gap:28px;
   }
-  .work-card.empty:hover{transform:none;box-shadow:none;border-color:var(--line);}
-  .work-card.empty span{font-size:12px;letter-spacing:.14em;color:var(--muted-dim);text-transform:uppercase;}
-  .work-card.empty strong{font-family:var(--display);font-size:18px;color:var(--muted);font-weight:500;}
+  .vertical-card{
+    width:325px;max-width:100%;
+    background:var(--surface);
+    border:1px solid var(--line);
+    border-radius:18px;
+    padding:20px 20px 6px;
+    transition:transform .5s var(--ease), border-color .5s var(--ease), box-shadow .5s var(--ease);
+  }
+  .vertical-card:hover{
+    transform:translateY(-6px);
+    border-color:rgba(255,31,61,.5);
+    box-shadow:0 30px 70px -20px rgba(255,31,61,.35);
+  }
+  .vertical-card-head{
+    display:flex;align-items:flex-start;justify-content:space-between;gap:12px;
+    margin-bottom:16px;
+  }
+  .vertical-card .work-title{font-size:19px;}
+  .vertical-embed-wrap{
+    position:relative;border-radius:12px;overflow:hidden;background:#000;
+    aspect-ratio:9/16;
+  }
+  .vertical-embed-wrap iframe{
+    position:absolute;inset:0;width:100%;height:100%;border:0;
+  }
+  .vertical-embed-wrap .sound-hint{bottom:14px;}
+  @media (max-width:420px){
+    .vertical-card{width:100%;padding:18px 18px 4px;}
+  }
 
   /* ---------- about ---------- */
   #about .wrap{display:grid;grid-template-columns:1fr;gap:48px;align-items:center;justify-items:center;}
@@ -506,6 +533,7 @@
   <nav>
     <ul>
       <li><a href="#work" data-cursor="hover">Work</a></li>
+      <li><a href="#WorkCut" data-cursor="hover">Work Cuts</a></li>
       <li><a href="#about" data-cursor="hover">About</a></li>
       <li><a href="#process" data-cursor="hover">Process</a></li>
       <li><a href="#contact" data-cursor="hover">Contact</a></li>
@@ -565,8 +593,12 @@
         </div>
         <p class="section-sub">A curated set of edits across short-form, commercial and cinematic formats — hover to preview, click to watch.</p>
       </div>
-
       <div class="work-grid" id="workGrid"></div>
+      <div class="vertical-head">
+        <div id="WorkCut" class="kicker">Vertical Cuts</div>
+        <h2 class="section-title" style="font-size:clamp(24px,3vw,38px);"><span>Made for the feed.</span></h2>
+      </div>
+      <div class="vertical-grid" id="tiktokGrid"></div>
     </div>
   </section>
 
@@ -702,28 +734,26 @@
 /* ============ PROJECT DATA — add new work here ============ */
 const PROJECTS = [
   {
-    title: "GUILHERME LUIZ - 900MIL SEGUIDORS INSTAGRAM",
+    title: "GUILHERME LUIZ - 900MIL NO INSTAGRAM",
     tag: "CAPCUT & PREMIERE",
     youtubeId: "gdZwI6Pv1bI"
   },
   {
     title: "Spider-Man: Brand New Day",
-    tag: "PREMIERE EFFECTS & KEYFRAMES",
+    tag: "PREMIERE EFFECTS KEYFRAMING",
     youtubeId: "T1my9d_6ntI"
   },
-  {
-    title: "BISTECONE CORTE",
-    tag: "CAPCUT",
-    youtubeId: "YIQFYG3o4oU"
-  },
-  {
-    title: "GUILHERME YOUTUBER E INFLUENCER",
-    tag: "CAPCUT E PREMIERE",
+   {
+    title: "INFLUENCER - YOUTUBER",
+    tag: "CAPCUT & PREMIERE",
     youtubeId: "YmYuz1-GOfg"
   },
-  
+    {
+    title: "PRIMO RICO - YOUTUBER",
+    tag: "CAPCUT & PREMIERE",
+    youtubeId: "0tgj2tpRHes"
+  },
 ];
-const PLACEHOLDER_SLOTS = 1; 
 
 /* ============ RENDER WORK GRID ============ */
 const grid = document.getElementById('workGrid');
@@ -757,12 +787,94 @@ PROJECTS.forEach((p, i) => {
   grid.appendChild(card);
 });
 
-for (let i = 0; i < PLACEHOLDER_SLOTS; i++) {
-  const empty = document.createElement('div');
-  empty.className = 'work-card empty reveal';
-  empty.innerHTML = `<span>Coming Soon</span><strong>New project — add it here</strong>`;
-  grid.appendChild(empty);
-}
+/* ============ TIKTOK VERTICAL PROJECTS — add new ones here ============ */
+const TIKTOK_PROJECTS = [
+  {
+    title: "BISTECONE",
+    tag: "Vertical Edit - PREMIERE",
+    url: "https://www.tiktok.com/@_nikoeditor/video/7673998345102200081",
+    videoId: "7673998345102200081"
+  },
+  {
+    title: "BISTECONE",
+    tag: "Vertical Edit - CAPCUT",
+    url: "https://www.tiktok.com/@_nikoeditor/video/7660101866927164692",
+    videoId: "7660101866927164692"
+  },
+  {
+    title: "NEYMAR",
+    tag: "Vertical Edit - CAPCUT",
+    url: "https://www.tiktok.com/@_nikoeditor/video/7660101324217896213",
+    videoId: "7660101324217896213"
+  }
+];
+
+const tiktokGrid = document.getElementById('tiktokGrid');
+
+TIKTOK_PROJECTS.forEach((p, i) => {
+  const frameId = `tiktokPlayer${i}`;
+  const card = document.createElement('div');
+  card.className = 'vertical-card reveal';
+  card.innerHTML = `
+    <div class="vertical-card-head">
+      <div>
+        <div class="work-title">${p.title}</div>
+        <div class="work-tag">${p.tag}</div>
+      </div>
+      <div class="work-index">0${i+1}</div>
+    </div>
+    <div class="vertical-embed-wrap">
+      <iframe
+        id="${frameId}"
+        class="tiktok-player-frame"
+        src="https://www.tiktok.com/player/v1/${p.videoId}?music_info=0&description=0&native_context_menu=0&closed_caption=0&rel=0&controls=1&autoplay=1&loop=1&muted=0"
+        allow="autoplay; fullscreen"
+        allowfullscreen
+        title="${p.title}"
+      ></iframe>
+      <div class="sound-hint tiktok-sound-hint" data-target="${frameId}"><i></i>Toque para ativar o som</div>
+    </div>
+  `;
+  tiktokGrid.appendChild(card);
+});
+
+// TikTok's Embed Player talks to the page via postMessage.
+// We try to autoplay WITH sound; if the browser blocks unmuted autoplay
+// (standard browser policy, same as any video on the web), TikTok reports
+// an AUTOPLAY_ERROR and we surface the same "tap to enable sound" hint
+// already used on the hero video.
+window.addEventListener('message', (event) => {
+  const data = event.data;
+  if (!data || !data['x-tiktok-player']) return;
+
+  const frames = document.querySelectorAll('.tiktok-player-frame');
+  frames.forEach((frame) => {
+    if (frame.contentWindow !== event.source) return;
+    const hint = frame.parentElement.querySelector('.tiktok-sound-hint');
+    if (!hint) return;
+
+    if (data.type === 'onPlayerError' && data.value && data.value.errorType === 'AUTOPLAY_ERROR') {
+      hint.classList.add('show');
+    }
+    if (data.type === 'onMute' && data.value === true) {
+      hint.classList.add('show');
+    }
+    if (data.type === 'onMute' && data.value === false) {
+      hint.classList.remove('show');
+    }
+  });
+});
+
+document.querySelectorAll('.tiktok-sound-hint').forEach((hint) => {
+  hint.addEventListener('click', () => {
+    const iframe = document.getElementById(hint.dataset.target);
+    if (iframe && iframe.contentWindow) {
+      iframe.contentWindow.postMessage({ type: 'unMute', 'x-tiktok-player': true }, '*');
+      iframe.contentWindow.postMessage({ type: 'play', 'x-tiktok-player': true }, '*');
+    }
+    hint.classList.remove('show');
+  });
+});
 
 /* ============ CUSTOM CURSOR ============ */
 const cursorDot = document.querySelector('.cursor-dot');
