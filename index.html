@@ -107,7 +107,7 @@
   /* ---------- ambient background ---------- */
   #site-bg{
     position:fixed;inset:0;z-index:0;pointer-events:none;
-    background-image:url('imagem/niko.png');
+    background-image:url('/imagem/niko.png');
     background-size:cover;background-position:center 28%;
     opacity:.85;
   }
@@ -685,10 +685,10 @@
   <div class="wrap footer-row">
     <div class="logo">NIKO<em>.</em>EDITOR</div>
     <div class="footer-links">
-      <a href="https://www.instagram.com/editor.develop/" target="_blank" rel="noopener" data-cursor="hover">Instagram</a>
+      <a href="https://www.instagram.com/nicolasdeveper/" target="_blank" rel="noopener" data-cursor="hover">Instagram</a>
       <a href="https://discord.com/users/nicke_35192" target="_blank" rel="noopener" data-cursor="hover">Discord</a>
       <a href="#" data-cursor="hover">YouTube</a>
-      <a href="#" data-cursor="hover"></a>
+      <a href="#" data-cursor="hover">LinkedIn</a>
     </div>
     <div class="footer-fine">© 2026 Niko Editor. All rights reserved.</div>
   </div>
@@ -702,22 +702,28 @@
 /* ============ PROJECT DATA — add new work here ============ */
 const PROJECTS = [
   {
-    title: "PRIMO RICO",
-    tag: "Short-form · Reel",
-    youtubeId: "0tgj2tpRHes"
-  },
-  {
-    title: "GUILHERME ",
-    tag: "Cinematic Edit",
+    title: "GUILHERME LUIZ - 900MIL SEGUIDORS INSTAGRAM",
+    tag: "CAPCUT & PREMIERE",
     youtubeId: "gdZwI6Pv1bI"
   },
   {
+    title: "Spider-Man: Brand New Day",
+    tag: "PREMIERE EFFECTS & KEYFRAMES",
+    youtubeId: "T1my9d_6ntI"
+  },
+  {
     title: "BISTECONE CORTE",
-    tag: "Video Edit",
+    tag: "CAPCUT",
     youtubeId: "YIQFYG3o4oU"
-  }
+  },
+  {
+    title: "GUILHERME YOUTUBER E INFLUENCER",
+    tag: "CAPCUT E PREMIERE",
+    youtubeId: "YmYuz1-GOfg"
+  },
+  
 ];
-const PLACEHOLDER_SLOTS = 2; // empty "coming soon" cards after real projects
+const PLACEHOLDER_SLOTS = 1; 
 
 /* ============ RENDER WORK GRID ============ */
 const grid = document.getElementById('workGrid');
@@ -916,7 +922,7 @@ if(heroVisual && !isTouch){
 
 const heroVideoBg = document.getElementById('heroVideoBg');
 const soundHint = document.getElementById('soundHint');
-const HERO_VIDEO_ID = 'T1my9d_6ntI';
+const HERO_VIDEO_ID = '0tgj2tpRHes';
 let heroPlayer;
 
 (function loadYouTubeAPI(){
